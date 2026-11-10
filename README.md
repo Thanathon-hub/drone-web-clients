@@ -41,3 +41,26 @@ drone-project/
 │   ├── index.html         # Structure and UI (Tailwind CSS)
 │   └── script.js          # Screen switching and connectivity logic API (Fetch)
 └── README.md              # Project description document
+
+## Configuration & Setup
+
+1. Clone this repository:
+   ```bash
+   git clone <YOUR_GITHUB_REPO_URL>
+   cd <YOUR_PROJECT_FOLDER>
+   ```
+
+2. Configure the API Server URL and Drone ID in `script.js` (or via environment configuration):
+   ```javascript
+   const API_BASE_URL = '[https://your-api-server.onrender.com](https://your-api-server.onrender.com)';
+   const DRONE_ID = 3001;
+   ```
+
+## How to Run Locally
+
+1. Ensure the **Drone API Server** is running.
+2. Open `index.html` directly in a web browser, or run it using the **Live Server** extension in VS Code, or run via `npx serve`:
+   ```bash
+   npx serve .
+   ```
+3. Open `http://localhost:3000` (or the port shown in your terminal) in your browser.

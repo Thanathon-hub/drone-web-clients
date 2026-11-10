@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://localhost:4000'; 
+const API_BASE_URL = 'http://localhost:4000'; // Change from http://localhost:4000 to the actual URL
 const DRONE_ID = 3001;
 
 let cachedConfig = null;
