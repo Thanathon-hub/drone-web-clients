@@ -42,6 +42,7 @@ drone-project/
 │   └── script.js          # Screen switching and connectivity logic API (Fetch)
 └── README.md              # Project description document
 
+
 ## Configuration & Setup
 
 1. Clone this repository:
