@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drone Command</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .serif-title { font-family: 'Playfair Display', serif; }
+    </style>
+</head>
+<body class="bg-[#121110] text-[#E5E2DE] min-h-screen flex flex-col justify-between selection:bg-amber-100 selection:text-black">
+
+    <header class="border-b border-white/10 sticky top-0 bg-[#121110]/90 backdrop-blur-md z-50">
+        <div class="container mx-auto px-6 py-6 flex justify-center items-center">
+            <h1 class="serif-title text-2xl md:text-3xl tracking-[0.25em] font-medium text-white uppercase">MAJESTIC</h1>
+        </div>
+
+        <div class="flex justify-center space-x-10 pb-4 text-xs tracking-widest uppercase">
+            <button onclick="switchPage('config')" id="tab-config" class="text-white border-b border-white pb-1 transition font-medium">1. View Config</button>
+            <button onclick="switchPage('form')" id="tab-form" class="text-zinc-400 hover:text-white pb-1 transition">2. Log Form</button>
+            <button onclick="switchPage('logs')" id="tab-logs" class="text-zinc-400 hover:text-white pb-1 transition">3. View Logs</button>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-16 flex-grow flex items-center justify-center">
+        
+        <!-- Page #1: View Config -->
+        <section id="page-config" class="page-content w-full max-w-xl text-center space-y-8">
+            <div class="space-y-3">
+                <span class="text-xs uppercase tracking-[0.3em] text-amber-200/80">System Specifications</span>
+                <h2 class="serif-title text-4xl md:text-5xl italic font-normal tracking-wide text-white">Make Your Drone<br>Feel Like Home</h2>
+                <p class="text-zinc-400 text-sm max-w-md mx-auto font-light leading-relaxed">
+                    Thoughtfully designed telemetry data made with premium precision, crafted for performance, and built to last.
+                </p>
+            </div>
+
+            <div class="bg-[#1a1816] border border-white/10 rounded-2xl p-8 text-left shadow-2xl relative overflow-hidden">
+                <div id="config-loading" class="text-zinc-400 text-center py-6 italic">Loading configuration...</div>
+                <div id="config-data" class="space-y-4 hidden">
+                    <div class="flex justify-between border-b border-white/5 pb-3"><span class="text-zinc-400 text-sm">Drone ID</span> <span id="cfg-id" class="font-mono text-amber-100"></span></div>
+                    <div class="flex justify-between border-b border-white/5 pb-3"><span class="text-zinc-400 text-sm">Drone Name</span> <span id="cfg-name" class="font-medium text-white"></span></div>
+                    <div class="flex justify-between border-b border-white/5 pb-3"><span class="text-zinc-400 text-sm">Light Status</span> <span id="cfg-light" class="uppercase text-amber-200 font-mono text-sm"></span></div>
+                    <div class="flex justify-between pb-1"><span class="text-zinc-400 text-sm">Country</span> <span id="cfg-country" class="text-white"></span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Page #2: Temperature Log Form -->
+        <section id="page-form" class="page-content w-full max-w-lg bg-[#1a1816] border border-white/10 rounded-2xl p-8 shadow-2xl hidden">
+            <div class="text-center mb-8">
+                <span class="text-xs uppercase tracking-[0.3em] text-amber-200/80">Data Input</span>
+                <h2 class="serif-title text-3xl italic text-white mt-1">Temperature Log</h2>
+                <p class="text-zinc-400 text-xs mt-2">Record current thermal metrics in celsius</p>
+            </div>
+
+            <form id="log-form" class="space-y-6">
+                <div>
+                    <label class="block text-xs uppercase tracking-widest text-zinc-400 mb-2 font-medium">Temperature in Celsius (°C)</label>
+                    <input type="number" step="any" id="celsius-input" required placeholder="e.g. 25.5" class="w-full bg-[#121110] border border-white/10 px-4 py-4 text-white placeholder-zinc-600 focus:outline-none focus:border-amber-200 transition font-mono rounded-lg">
+                </div>
+                <button type="submit" class="w-full bg-white text-black py-4 text-xs font-semibold tracking-[0.2em] uppercase hover:bg-amber-100 transition shadow-md rounded-lg">
+                    Submit Data Record
+                </button>
+            </form>
+            <div id="form-message" class="mt-6 text-center text-sm font-medium"></div>
+        </section>
+
+        <!-- Page #3: View Logs -->
+        <section id="page-logs" class="page-content w-full max-w-4xl bg-[#1a1816] border border-white/10 rounded-2xl p-8 shadow-2xl hidden">
+            <div class="flex justify-between items-end mb-6 border-b border-white/10 pb-4">
+                <div>
+                    <span class="text-xs uppercase tracking-[0.3em] text-amber-200/80">History Archive</span>
+                    <h2 class="serif-title text-3xl italic text-white mt-1">Flight Logs</h2>
+                </div>
+                <span class="text-xs text-zinc-400 tracking-wider">Latest 12 Records</span>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-sm border-collapse">
+                    <thead>
+                        <tr class="border-b border-white/10 text-zinc-400 font-normal text-xs uppercase tracking-wider">
+                            <th class="pb-3 px-3">Created</th>
+                            <th class="pb-3 px-3">Country</th>
+                            <th class="pb-3 px-3">Drone ID</th>
+                            <th class="pb-3 px-3">Drone Name</th>
+                            <th class="pb-3 px-3">Celsius</th>
+                        </tr>
+                    </thead>
+                    <tbody id="logs-table-body" class="text-zinc-300 divide-y divide-white/5">
+                        <tr><td colspan="5" class="py-8 text-center text-zinc-500 italic">Synchronizing logs...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+
+    <div class="py-4"></div>
+
+    <script src="script.js"></script>
+    <script>
+        const originalSwitchPage = window.switchPage;
+        window.switchPage = function(pageName) {
+            if (typeof originalSwitchPage === 'function') {
+                originalSwitchPage(pageName);
+            }
+            ['config', 'form', 'logs'].forEach(name => {
+                const btn = document.getElementById(`tab-${name}`);
+                if (btn) {
+                    if (name === pageName) {
+                        btn.className = "text-white border-b border-white pb-1 transition font-medium";
+                    } else {
+                        btn.className = "text-zinc-400 hover:text-white pb-1 transition";
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
