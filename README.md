@@ -41,8 +41,7 @@ drone-project/
 │   ├── index.html         # Structure and UI (Tailwind CSS)
 │   └── script.js          # Screen switching and connectivity logic API (Fetch)
 └── README.md              # Project description document
-
----
+```
 
 ## Configuration & Setup
 
@@ -60,7 +59,7 @@ drone-project/
 
 ## How to Run Locally
 
-1. Ensure the **Drone API Server** is running.
+1. Ensure the **Drone API Server (Assignment #1)** is running.
 2. Open `index.html` directly in a web browser, or run it using the **Live Server** extension in VS Code, or run via `npx serve`:
    ```bash
    npx serve .
